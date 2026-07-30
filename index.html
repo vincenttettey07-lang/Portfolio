@@ -315,6 +315,73 @@
             max-width: 680px;
         }
 
+        .highlights-section {
+            padding-top: 0;
+            padding-bottom: 2rem;
+        }
+
+        .highlights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1rem;
+        }
+
+        .highlight-card {
+            padding: 1.2rem 1.2rem 1.25rem;
+            border-radius: 20px;
+            background: linear-gradient(135deg, rgba(124, 147, 255, 0.16), rgba(36, 216, 192, 0.08));
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 0 0 1px rgba(124, 147, 255, 0.15), 0 0 24px rgba(36, 216, 192, 0.2), 0 0 46px rgba(124, 147, 255, 0.16), var(--shadow);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        .highlight-card::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: inherit;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(36, 216, 192, 0.8), rgba(124, 147, 255, 0.7), rgba(255, 255, 255, 0.25));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0.8;
+            pointer-events: none;
+        }
+
+        .highlight-card:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 0 0 1px rgba(124, 147, 255, 0.24), 0 0 32px rgba(36, 216, 192, 0.28), 0 0 58px rgba(124, 147, 255, 0.24), var(--shadow);
+            border-color: rgba(124, 147, 255, 0.42);
+        }
+
+        .highlight-pill {
+            display: inline-block;
+            margin-bottom: 0.7rem;
+            padding: 0.35rem 0.7rem;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.08);
+            color: #cfd8ff;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .highlight-card strong {
+            display: block;
+            color: #fff;
+            margin-bottom: 0.45rem;
+            font-size: 1.02rem;
+        }
+
+        .highlight-card p {
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
         .about-grid {
             display: grid;
             grid-template-columns: 1.1fr 0.9fr;
@@ -608,6 +675,30 @@
                         <img src="lv_0_20260419021727.jpg" alt="Vincent Tettey">
                         <div class="profile-badge">Available for innovation-focused projects</div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="highlights-section">
+        <div class="container">
+            <div class="highlights-grid">
+                <div class="highlight-card">
+                    <span class="highlight-pill">Open to opportunities</span>
+                    <strong>Building AI products with measurable impact</strong>
+                    <p>I enjoy turning complex problems into thoughtful, practical solutions that create real value.</p>
+                </div>
+                <div class="highlight-card">
+                    <span class="highlight-pill">What I bring</span>
+                    <strong>From prototype to production-ready systems</strong>
+                    <p>My work spans model development, backend integration, data pipelines, and polished user experiences.</p>
+                </div>
+                <div class="highlight-card">
+                    <a href="#contact" style="text-decoration: none; color: inherit; display: block;">
+                        <span class="highlight-pill">Let’s connect</span>
+                        <strong>Interested in collaborations or full-time roles</strong>
+                        <p>Whether it’s a startup idea, research challenge, or applied AI project, I’d be glad to connect.</p>
+                    </a>
                 </div>
             </div>
         </div>
