@@ -5,9 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vincent's Portfolio - VINCENT TETTEY</title>
     <style>
+        :root {
+            --bg: #050816;
+            --bg-soft: #0b1224;
+            --text: #e6ecff;
+            --muted: #8da0c7;
+            --accent: #7c93ff;
+            --accent-2: #24d8c0;
+            --card: rgba(255, 255, 255, 0.06);
+            --border: rgba(255, 255, 255, 0.12);
+            --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+        }
+
         html {
             scroll-behavior: smooth;
         }
+
         * {
             margin: 0;
             padding: 0;
@@ -16,22 +29,34 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: url('./Brain.jpg') no-repeat center center fixed;
-            background-size: cover;
-            background-attachment: fixed;
+            line-height: 1.7;
+            color: var(--text);
+            background:
+                radial-gradient(circle at top left, rgba(124, 147, 255, 0.22), transparent 24%),
+                radial-gradient(circle at bottom right, rgba(36, 216, 192, 0.16), transparent 28%),
+                linear-gradient(135deg, var(--bg), #0f1730 65%, #09101f);
+            min-height: 100vh;
             position: relative;
         }
 
-        /* Navigation */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: url('./Brain.jpg') center/cover;
+            opacity: 0.13;
+            mix-blend-mode: screen;
+            pointer-events: none;
+        }
+
         nav {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 1rem 0;
             position: sticky;
             top: 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             z-index: 1000;
+            padding: 1rem 0;
+            background: rgba(5, 8, 22, 0.75);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         nav .container {
@@ -43,26 +68,55 @@
             padding: 0 2rem;
         }
 
-        nav .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: white;
+        .logo {
+            font-size: 1.18rem;
+            font-weight: 800;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #fff;
+            text-shadow: 0 0 20px rgba(36, 216, 192, 0.75), 0 0 34px rgba(124, 147, 255, 0.45);
+            animation: nameGlow 3s ease-in-out infinite alternate;
         }
 
         nav ul {
             display: flex;
             list-style: none;
-            gap: 2rem;
+            gap: 1.4rem;
         }
 
         nav a {
-            color: white;
             text-decoration: none;
-            transition: opacity 0.3s;
+            color: var(--muted);
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            display: inline-block;
+            padding: 0.3rem 0.5rem;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -0.25rem;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-2), transparent);
+            border-radius: 999px;
+            transform: translateX(-50%);
+            transition: width 0.3s ease, box-shadow 0.3s ease;
         }
 
         nav a:hover {
-            opacity: 0.8;
+            color: #fff;
+            transform: translateY(-2px) scale(1.08);
+            text-shadow: 0 0 24px rgba(36, 216, 192, 0.95), 0 0 40px rgba(124, 147, 255, 0.55), 0 0 60px rgba(124, 147, 255, 0.3);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+            box-shadow: 0 0 16px rgba(36, 216, 192, 0.9), 0 0 28px rgba(124, 147, 255, 0.45);
         }
 
         .container {
@@ -71,132 +125,294 @@
             padding: 0 2rem;
         }
 
-        /* Hero Section */
         .hero {
-            background: linear-gradient(rgba(102, 126, 234, 0.8), rgba(118, 75, 162, 0.8)), url('./ai-concept-technology.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            color: white;
-            padding: 8rem 2rem;
-            text-align: center;
+            padding: 6rem 0 4.5rem;
             position: relative;
         }
 
-        .hero h1 {
-            font-size: 3rem;
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2.3rem, 4vw, 3.8rem);
+            line-height: 1.08;
             margin-bottom: 1rem;
-            animation: fadeInDown 1s ease, glow 3s ease-in-out infinite;
+            letter-spacing: -0.03em;
         }
 
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-            animation: fadeInUp 1.2s ease;
-        }
-
-        .cta-button {
+        .hero-content .eyebrow {
             display: inline-block;
-            background-color: white;
-            color: #667eea;
-            padding: 0.8rem 2rem;
-            border-radius: 5px;
+            padding: 0.45rem 0.85rem;
+            margin-bottom: 1rem;
+            border-radius: 999px;
+            background: rgba(124, 147, 255, 0.16);
+            color: #b7c9ff;
+            font-size: 0.86rem;
+            font-weight: 700;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+        }
+
+        .hero-content p {
+            font-size: 1.08rem;
+            color: var(--muted);
+            margin-bottom: 1.2rem;
+            max-width: 640px;
+        }
+
+        .hero-content .name {
+            color: #fff;
+            font-weight: 800;
+            text-shadow: 0 0 20px rgba(36, 216, 192, 0.95), 0 0 36px rgba(124, 147, 255, 0.65), 0 0 56px rgba(124, 147, 255, 0.35);
+            animation: nameGlow 3.2s ease-in-out infinite alternate;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1.7rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.9rem 1.3rem;
+            border-radius: 999px;
+            font-weight: 700;
             text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: 2px solid transparent;
-            animation: fadeInUp 1.4s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
         }
 
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            border-color: white;
+        .btn-primary {
+            color: #05101d;
+            background: linear-gradient(135deg, var(--accent-2), #9be8f6);
+            box-shadow: 0 10px 30px rgba(36, 216, 192, 0.25);
         }
 
-        /* Projects Section */
-        .projects {
-            padding: 4rem 2rem;
-            background: rgba(26, 26, 62, 0.8);
-            backdrop-filter: blur(10px);
+        .btn-secondary {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--border);
         }
 
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: #ffffff;
+        .btn:hover,
+        .project-link:hover,
+        .contact-method a:hover,
+        .skill:hover,
+        .tech-tag:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 0 24px rgba(124, 147, 255, 0.35), 0 0 38px rgba(36, 216, 192, 0.24);
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .stat-card {
+            padding: 1rem 1.05rem;
+            border-radius: 16px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+        }
+
+        .stat-card strong {
+            display: block;
+            font-size: 1.2rem;
+            color: #fff;
+        }
+
+        .stat-card span {
+            color: var(--muted);
+            font-size: 0.92rem;
+        }
+
+        .hero-visual {
             position: relative;
-            padding-bottom: 1rem;
+            display: flex;
+            justify-content: center;
         }
 
-        .section-title::after {
-            content: '';
+        .profile-shell {
+            position: relative;
+            padding: 1.2rem;
+            border-radius: 50%;
+            width: min(430px, 100%);
+            aspect-ratio: 1;
+            background: linear-gradient(145deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04));
+            border: 1px solid rgba(124, 147, 255, 0.35);
+            box-shadow: 0 0 0 1px rgba(124, 147, 255, 0.18), 0 0 28px rgba(36, 216, 192, 0.26), var(--shadow);
+            backdrop-filter: blur(16px);
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(24px) scale(0.97);
+            transition: transform 0.6s ease, box-shadow 0.6s ease, opacity 0.6s ease;
+            animation: profileGlow 5.5s linear infinite;
+        }
+
+        .profile-shell.is-visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .profile-shell:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 44px rgba(36, 216, 192, 0.28), 0 0 70px rgba(124, 147, 255, 0.22), 0 10px 40px rgba(0, 0, 0, 0.35);
+        }
+
+        .profile-shell img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            display: block;
+            border: 4px solid rgba(255,255,255,0.16);
+            transition: transform 0.4s ease;
+        }
+
+        .profile-shell:hover img {
+            transform: scale(1.03);
+        }
+
+        .profile-badge {
             position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 4px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 2px;
+            left: -0.5rem;
+            bottom: 1rem;
+            padding: 0.85rem 1rem;
+            border-radius: 16px;
+            background: rgba(5, 8, 22, 0.9);
+            border: 1px solid var(--border);
+            color: #fff;
+            font-weight: 700;
+            box-shadow: var(--shadow);
+        }
+
+        section {
+            padding: 5rem 0;
+        }
+
+        .section-heading {
+            margin-bottom: 2rem;
+        }
+
+        .section-heading h2 {
+            font-size: 2rem;
+            margin-bottom: 0.6rem;
+            color: #fff;
+        }
+
+        .section-heading p {
+            color: var(--muted);
+            max-width: 680px;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .about-card, .contact-card, .project-card {
+            padding: 1.4rem;
+            border-radius: 24px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(16px);
+        }
+
+        .about-card p {
+            color: var(--muted);
+            margin-bottom: 1rem;
+        }
+
+        .skills {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .skill {
+            padding: 0.55rem 0.8rem;
+            border-radius: 999px;
+            background: rgba(124, 147, 255, 0.15);
+            color: #cfd8ff;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .focus-list {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .focus-item {
+            padding: 1rem 1.05rem;
+            border-radius: 18px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .focus-item h3 {
+            color: #fff;
+            margin-bottom: 0.35rem;
+        }
+
+        .focus-item p {
+            color: var(--muted);
+            font-size: 0.95rem;
         }
 
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 1.3rem;
         }
 
         .project-card {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 15px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 1px solid rgba(102, 126, 234, 0.2);
-            backdrop-filter: blur(10px);
-            animation: slideInLeft 0.8s ease both;
+            transition: transform 0.3s ease, border-color 0.3s ease;
         }
 
-        .project-card:nth-child(1) { animation-delay: 0.2s; }
-        .project-card:nth-child(2) { animation-delay: 0.4s; }
-        .project-card:nth-child(3) { animation-delay: 0.6s; }
-
         .project-card:hover {
-            transform: translateY(-15px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
-            border-color: rgba(102, 126, 234, 0.8);
+            transform: translateY(-5px);
+            border-color: rgba(124, 147, 255, 0.5);
         }
 
         .project-image {
             width: 100%;
-            height: 200px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 3rem;
-        }
-
-        .project-content {
-            padding: 1.5rem;
-        }
-
-        .project-content h3 {
-            margin-bottom: 0.5rem;
-            color: #667eea;
-        }
-
-        .project-content p {
-            color: #666;
+            height: 180px;
+            border-radius: 16px;
+            overflow: hidden;
             margin-bottom: 1rem;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .project-card h3 {
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-card p {
+            color: var(--muted);
             font-size: 0.95rem;
+            margin-bottom: 1rem;
         }
 
         .tech-tags {
@@ -207,357 +423,359 @@
         }
 
         .tech-tag {
-            background-color: #f0f0f0;
-            color: #667eea;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
+            background: rgba(124, 147, 255, 0.16);
+            color: #cfd8ff;
+            padding: 0.4rem 0.7rem;
+            border-radius: 999px;
             font-size: 0.8rem;
-            font-weight: 500;
+            font-weight: 600;
+        }
+
+        .project-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.45rem;
         }
 
         .project-link {
-            color: #667eea;
+            color: #8bdcff;
             text-decoration: none;
-            font-weight: bold;
-            transition: color 0.3s;
+            font-weight: 700;
+            display: inline-block;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, color 0.3s ease, text-shadow 0.3s ease;
         }
 
         .project-link:hover {
-            color: #764ba2;
-        }
-
-        /* About Section */
-        .about {
-            padding: 4rem 2rem;
-            background: rgba(26, 26, 62, 0.8);
-            backdrop-filter: blur(10px);
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .profile-image {
-            text-align: center;
-        }
-
-        .profile-image img {
-            width: 250px;
-            height: 250px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 5px solid #667eea;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            transition: transform 0.3s ease;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .profile-image img:hover {
-            transform: scale(1.05);
-        }
-
-        .about-text h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
             color: #ffffff;
+            text-shadow: 0 0 18px rgba(36, 216, 192, 0.75), 0 0 28px rgba(124, 147, 255, 0.45);
         }
 
-        .about-text p {
-            color: #e0e0e0;
-            margin-bottom: 1rem;
-            font-size: 1rem;
-        }
-
-        .skills {
+        .contact-card {
             display: flex;
+            flex-wrap: wrap;
             gap: 1rem;
-            flex-wrap: wrap;
-            margin-top: 2rem;
-        }
-
-        .skill {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            font-weight: 500;
-        }
-
-        /* Contact Section */
-        .contact {
-            padding: 4rem 2rem;
-            background: rgba(26, 26, 62, 0.8);
-            backdrop-filter: blur(10px);
-            text-align: center;
-        }
-
-        .contact p {
-            color: #e0e0e0;
-            font-size: 1.1rem;
-        }
-
-        .contact-methods {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-top: 2rem;
-            flex-wrap: wrap;
         }
 
         .contact-method {
-            padding: 1.5rem;
-            background-color: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(102, 126, 234, 0.3);
-            border-radius: 10px;
-            flex: 1;
-            min-width: 150px;
-            transition: all 0.3s ease;
+            flex: 1 1 calc(25% - 1rem);
+            min-width: 180px;
+            padding: 0.9rem;
+            border-radius: 16px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
         }
 
         .contact-method:hover {
-            background-color: rgba(102, 126, 234, 0.1);
-            border-color: rgba(102, 126, 234, 0.8);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 0 16px rgba(124, 147, 255, 0.16);
+            border-color: rgba(124, 147, 255, 0.35);
         }
 
         .contact-method h3 {
-            color: #ffffff;
+            color: #fff;
+            margin-bottom: 0.25rem;
         }
 
         .contact-method a {
-            color: #667eea;
+            color: #8bdcff;
             text-decoration: none;
-            font-weight: bold;
-            transition: color 0.3s;
+            font-weight: 700;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
         }
 
         .contact-method a:hover {
-            color: #764ba2;
+            color: #ffffff;
+            text-shadow: 0 0 16px rgba(36, 216, 192, 0.8), 0 0 24px rgba(124, 147, 255, 0.45);
         }
 
-        /* Footer */
         footer {
-            background: #333;
-            color: white;
+            padding: 2rem 0 3rem;
+            color: var(--muted);
             text-align: center;
-            padding: 2rem;
         }
 
-        /* Enhanced Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
+        @keyframes profileGlow {
+            0% {
+                box-shadow: 0 0 0 1px rgba(124, 147, 255, 0.18), 0 0 30px rgba(36, 216, 192, 0.28), 0 0 48px rgba(124, 147, 255, 0.22), 0 0 70px rgba(36, 216, 192, 0.16), var(--shadow);
             }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes slideInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes glow {
-            0%, 100% {
-                box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+            25% {
+                box-shadow: 0 0 0 1px rgba(124, 147, 255, 0.3), 0 0 38px rgba(36, 216, 192, 0.34), 0 0 58px rgba(124, 147, 255, 0.28), 0 0 80px rgba(36, 216, 192, 0.22), var(--shadow);
             }
             50% {
-                box-shadow: 0 0 30px rgba(102, 126, 234, 0.6);
+                box-shadow: 0 0 0 1px rgba(124, 147, 255, 0.24), 0 0 34px rgba(36, 216, 192, 0.3), 0 0 54px rgba(124, 147, 255, 0.26), 0 0 76px rgba(36, 216, 192, 0.2), var(--shadow);
+            }
+            75% {
+                box-shadow: 0 0 0 1px rgba(124, 147, 255, 0.3), 0 0 40px rgba(36, 216, 192, 0.36), 0 0 62px rgba(124, 147, 255, 0.3), 0 0 86px rgba(36, 216, 192, 0.24), var(--shadow);
+            }
+            100% {
+                box-shadow: 0 0 0 1px rgba(124, 147, 255, 0.18), 0 0 30px rgba(36, 216, 192, 0.28), 0 0 48px rgba(124, 147, 255, 0.22), 0 0 70px rgba(36, 216, 192, 0.16), var(--shadow);
             }
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            nav ul {
-                gap: 1rem;
+        @keyframes nameGlow {
+            from {
+                text-shadow: 0 0 20px rgba(36, 216, 192, 0.95), 0 0 36px rgba(124, 147, 255, 0.65), 0 0 56px rgba(124, 147, 255, 0.35);
             }
-
-            .hero h1 {
-                font-size: 2rem;
+            to {
+                text-shadow: 0 0 28px rgba(36, 216, 192, 1), 0 0 44px rgba(124, 147, 255, 0.8), 0 0 68px rgba(124, 147, 255, 0.42);
             }
+        }
 
-            .hero p {
-                font-size: 1rem;
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation: none !important;
+                transition: none !important;
+                scroll-behavior: auto !important;
             }
+        }
 
-            .section-title {
-                font-size: 1.8rem;
-            }
-
-            .about-content {
+        @media (max-width: 900px) {
+            .hero-grid, .about-grid {
                 grid-template-columns: 1fr;
             }
 
-            .about-text h2 {
-                font-size: 1.8rem;
+            .hero-visual {
+                order: -1;
+            }
+        }
+
+        @media (max-width: 640px) {
+            nav .container {
+                padding: 0 1rem;
             }
 
-            .profile-image img {
-                width: 200px;
-                height: 200px;
+            .container {
+                padding: 0 1rem;
             }
 
-            .contact-methods {
-                flex-direction: column;
+            .hero {
+                padding-top: 3rem;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            nav ul {
+                gap: 0.8rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
     <nav>
         <div class="container">
-            <div class="logo">Vincent's Portfolio</div>
+            <div class="logo">Vincent Tettey</div>
             <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a class="nav-link" href="#home">Home</a></li>
+                <li><a class="nav-link" href="#about">About</a></li>
+                <li><a class="nav-link" href="#projects">Projects</a></li>
+                <li><a class="nav-link" href="#contact">Contact</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="container">
-            <h1>AI/ML Projects Showcase</h1>
-            <p>Exploring the intersection of artificial intelligence and innovation</p>
-            <a href="#projects" class="cta-button">View My Work</a>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section class="projects" id="projects">
-        <div class="container">
-            <h2 class="section-title">Featured Projects</h2>
-            
-            <div class="projects-grid">
-                <!-- Project 1 -->
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="Annotation 2026-04-20 022828.png" alt="Book Recommendation System" style="width: 100%; height: 100%; object-fit: cover;">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <span class="eyebrow">AI Engineer • Data Scientist • Builder</span>
+                    <h1>Hello, I’m <span class="name">Vincent Tettey</span><br>and I build intelligent systems that solve real-world problems.</h1>
+                    <p>I design and ship AI-powered products, data-driven applications, and machine learning solutions with a strong focus on practical impact, scalable architecture, and clean engineering.</p>
+                    <div class="hero-actions">
+                        <a href="#projects" class="btn btn-primary">Explore My Work</a>
+                        <a href="#contact" class="btn btn-secondary">Let’s Connect</a>
                     </div>
-                    <div class="project-content">
-                        <h3>Book Recommendation System</h3>
-                        <p>A machine learning-based system that recommends books to users based on book searched.</p>
-                        <div class="tech-tags">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">NLP</span>
-                            <span class="tech-tag">Streamlit</span>
-                            <span class="tech-tag">Scikit-learn</span>
-                            <span class="tech-tag">Pandas</span>
+                    <div class="stats">
+                        <div class="stat-card">
+                            <strong>4+</strong>
+                            <span>Featured projects</span>
                         </div>
-                        <a href="https://book-recommendation-system-majtndx5drmajufn7cp235.streamlit.app/" class="project-link">View Live App →</a>
+                        <div class="stat-card">
+                            <strong>AI/ML</strong>
+                            <span>End-to-end solutions</span>
+                        </div>
+                        <div class="stat-card">
+                            <strong>AI/ML Engineer &amp; Backend Systems</strong>
+                            <span>Applied domain work</span>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Project 2 -->
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="Annotation 2026-04-20 022124.png" alt="Customer Segmentation" style="width: 100%; height: 100%; object-fit: cover;">
-                    </div>
-                    <div class="project-content">
-                        <h3>Customer Segmentation</h3>
-                        <p>Developed a machine learning model to segment customers based on their RFM purchasing behavior.</p>
-                        <div class="tech-tags">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">K-Means</span>
-                            <span class="tech-tag">Scikit-learn</span>
-                            <span class="tech-tag">Pandas</span>
-                            <span class="tech-tag">Streamlit</span>
-                        </div>
-                        <a href="https://customer-segmentation-app-durh2blbgqyyjjk2yikkga.streamlit.app/" class="project-link">View Live App →</a>
+                <div class="hero-visual">
+                    <div class="profile-shell" id="profile-shell">
+                        <img src="lv_0_20260419021727.jpg" alt="Vincent Tettey">
+                        <div class="profile-badge">Available for innovation-focused projects</div>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section class="about" id="about">
+    <section id="about">
         <div class="container">
-            <div class="about-content">
-                <div class="about-text">
-                    <h2>About Me</h2>
-                    <p>I'm a passionate AI developer and data scientist dedicated to creating intelligent solutions that solve real-world problems. With expertise in machine learning, deep learning, and natural language processing.</p>
-                    <p>I believe in the power of AI to transform industries and improve lives. My goal is to develop innovative, ethical, and impactful AI applications.</p>
+            <div class="section-heading">
+                <h2>About Me</h2>
+                <p>I bring together software engineering, machine learning, and applied AI to create practical products that move from idea to impact.</p>
+            </div>
+            <div class="about-grid">
+                <div class="about-card">
+                    <p>I’m a passionate AI developer and data scientist focused on building intelligent systems that improve workflows, automate decision-making, and unlock value from data.</p>
+                    <p>My recent work includes an AI-powered complaint assistant for pharmaceutical companies and a range of machine learning projects spanning recommendation systems, segmentation, and predictive analytics.</p>
                     <div class="skills">
                         <span class="skill">Machine Learning</span>
                         <span class="skill">Deep Learning</span>
                         <span class="skill">Python</span>
-                        <span class="skill">Data Science</span>
+                        <span class="skill">FastAPI</span>
+                        <span class="skill">React</span>
                         <span class="skill">NLP</span>
-                        <span class="skill">Computer Vision</span>
+                        <span class="skill">APIs</span>
                     </div>
                 </div>
-                <div class="profile-image">
-                    <img src="lv_0_20260419021727.jpg" alt="Vincent Tettey" style="width: 250px; height: 250px; border-radius: 50%; object-fit: cover; border: 5px solid #667eea; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+                <div class="focus-list">
+                    <div class="focus-item">
+                        <h3>Product-minded engineering</h3>
+                        <p>I build solutions with strong UX, robust architecture, and a clear path to deployment.</p>
+                    </div>
+                    <div class="focus-item">
+                        <h3>Applied AI systems</h3>
+                        <p>From models to workflows, I connect smart algorithms with real operational needs.</p>
+                    </div>
+                    <div class="focus-item">
+                        <h3>Continuous learning</h3>
+                        <p>I stay close to modern tools and practices so every project is built with current standards in mind.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
+    <section id="projects">
         <div class="container">
-            <h2 class="section-title">Get In Touch</h2>
-            <p>Have a project in mind? Let's collaborate!</p>
-            
-            <div class="contact-methods">
+            <div class="section-heading">
+                <h2>Featured Projects</h2>
+                <p>A selection of projects that reflect my work in AI, data science, and applied software development.</p>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="Annotation 2026-04-20 022828.png" alt="Book Recommendation System">
+                    </div>
+                    <h3>Book Recommendation System</h3>
+                    <p>A machine learning-powered recommendation system built around text similarity and personalized suggestions.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">NLP</span>
+                        <span class="tech-tag">Streamlit</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://book-recommendation-system-majtndx5drmajufn7cp235.streamlit.app/" class="project-link" target="_blank">View Live App →</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="Annotation 2026-04-20 022124.png" alt="Customer Segmentation">
+                    </div>
+                    <h3>Customer Segmentation</h3>
+                    <p>An RFM-based segmentation app that uses clustering to identify customer groups and support decision-making.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">K-Means</span>
+                        <span class="tech-tag">Scikit-learn</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://customer-segmentation-app-durh2blbgqyyjjk2yikkga.streamlit.app/" class="project-link" target="_blank">View Live App →</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="download (1).webp" alt="Summer Analytics Hackathon">
+                    </div>
+                    <h3>Summer Analytics Hackathon</h3>
+                    <p>A high-impact classification project using CDC NHANES data to predict age group with an end-to-end ML workflow.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Machine Learning</span>
+                        <span class="tech-tag">Random Forest</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/vincenttettey07-lang/Summer-Analytics-2026-HACKATHON-" class="project-link" target="_blank">View GitHub Repo →</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="download.webp" alt="AI Complaint Assistant">
+                    </div>
+                    <h3>AI-Powered Complaint Assistant</h3>
+                    <p>A pharmaceutical complaint management system that combines AI extraction, risk analysis, and structured data workflows.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">FastAPI</span>
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">LangGraph</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/vincenttettey07-lang/ai-powered-complaint-assistant" class="project-link" target="_blank">View GitHub Repo →</a>
+                        <a href="https://drive.google.com/file/d/1a60vDI60BTuOSccRuBGn087BqEGnNHyd/view?usp=drivesdk" class="project-link" target="_blank">Watch Demo Video →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <div class="section-heading">
+                <h2>Let’s Build Something Meaningful</h2>
+                <p>Open to collaborations, technical projects, and opportunities where AI and software can create measurable value.</p>
+            </div>
+            <div class="contact-card">
                 <div class="contact-method">
-                    <h3>📧 Email</h3>
+                    <h3>Email</h3>
                     <a href="mailto:vincenttettey07@gmail.com">vincenttettey07@gmail.com</a>
                 </div>
                 <div class="contact-method">
-                    <h3>📱 Phone</h3>
-                    <a href="tel:+233509331913">+233509331913</a>
+                    <h3>Phone</h3>
+                    <a href="tel:+233591293237">+233591293237</a>
                 </div>
                 <div class="contact-method">
-                    <h3>💼 LinkedIn</h3>
+                    <h3>LinkedIn</h3>
                     <a href="https://www.linkedin.com/in/vincent-tettey-280185359/" target="_blank">Vincent Tettey</a>
                 </div>
                 <div class="contact-method">
-                    <h3>🐙 GitHub</h3>
+                    <h3>GitHub</h3>
                     <a href="https://github.com/vincenttettey07-lang/" target="_blank">vincenttettey07-lang</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <div class="container">
-            <p>&copy; 2026 AI Portfolio. All rights reserved.</p>
+            <p>© 2026 Vincent Tettey. Designed with a focus on technical excellence and clarity.</p>
         </div>
     </footer>
+
+    <script>
+        const profileShell = document.getElementById('profile-shell');
+
+        if (profileShell) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        profileShell.classList.add('is-visible');
+                        observer.disconnect();
+                    }
+                });
+            }, { threshold: 0.25 });
+
+            observer.observe(profileShell);
+        }
+    </script>
 </body>
 </html>
 
