@@ -80,43 +80,40 @@
 
         nav ul {
             display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-end;
             list-style: none;
-            gap: 1.4rem;
+            gap: 0.55rem;
+            padding: 0.35rem;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
         }
 
         nav a {
             text-decoration: none;
             color: var(--muted);
             font-weight: 700;
-            font-size: 1rem;
+            font-size: 0.95rem;
             transition: all 0.3s ease;
             position: relative;
             display: inline-block;
-            padding: 0.3rem 0.5rem;
-        }
-
-        nav a::after {
-            content: '';
-            position: absolute;
-            left: 50%;
-            bottom: -0.25rem;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--accent-2), transparent);
+            padding: 0.45rem 0.78rem;
             border-radius: 999px;
-            transform: translateX(-50%);
-            transition: width 0.3s ease, box-shadow 0.3s ease;
         }
 
         nav a:hover {
             color: #fff;
-            transform: translateY(-2px) scale(1.08);
-            text-shadow: 0 0 24px rgba(36, 216, 192, 0.95), 0 0 40px rgba(124, 147, 255, 0.55), 0 0 60px rgba(124, 147, 255, 0.3);
+            background: rgba(124, 147, 255, 0.16);
+            transform: translateY(-2px) scale(1.04);
+            box-shadow: inset 0 0 0 1px rgba(124, 147, 255, 0.2), 0 0 18px rgba(36, 216, 192, 0.22);
+            text-shadow: 0 0 18px rgba(36, 216, 192, 0.7), 0 0 24px rgba(124, 147, 255, 0.35);
         }
 
-        nav a:hover::after {
-            width: 100%;
-            box-shadow: 0 0 16px rgba(36, 216, 192, 0.9), 0 0 28px rgba(124, 147, 255, 0.45);
+        .certification-link.disabled {
+            color: var(--muted);
+            pointer-events: none;
         }
 
         .container {
@@ -239,6 +236,8 @@
         .hero-visual {
             position: relative;
             display: flex;
+            flex-direction: column;
+            align-items: center;
             justify-content: center;
         }
 
@@ -296,8 +295,230 @@
             box-shadow: var(--shadow);
         }
 
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+            margin-top: 1.1rem;
+            padding: 0;
+            background: transparent;
+            border: none;
+            box-shadow: none;
+        }
+
+        .social-links a {
+            width: 3.2rem;
+            height: 3.2rem;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            box-shadow: 0 0 0 1px rgba(124, 147, 255, 0.12), 0 0 20px rgba(36, 216, 192, 0.2);
+            transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-2px) scale(1.08);
+            background: linear-gradient(135deg, rgba(124, 147, 255, 0.24), rgba(36, 216, 192, 0.2));
+            box-shadow: 0 0 20px rgba(36, 216, 192, 0.28), 0 0 28px rgba(124, 147, 255, 0.2);
+        }
+
+        .social-links svg {
+            width: 1.3rem;
+            height: 1.3rem;
+            fill: currentColor;
+        }
+
         section {
             padding: 5rem 0;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+        }
+
+        .service-card {
+            padding: 1.2rem;
+            border-radius: 20px;
+            background: linear-gradient(135deg, rgba(124, 147, 255, 0.16), rgba(36, 216, 192, 0.08));
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 0 0 1px rgba(124, 147, 255, 0.14), 0 0 28px rgba(36, 216, 192, 0.24), 0 0 56px rgba(124, 147, 255, 0.18), var(--shadow);
+        }
+
+        .service-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.55rem;
+            height: 2.55rem;
+            margin-bottom: 0.8rem;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.08);
+            color: #8bdcff;
+            font-size: 1.05rem;
+        }
+
+        .service-card h3 {
+            color: #fff;
+            margin-bottom: 0.4rem;
+        }
+
+        .service-card p {
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        .skills-marquee {
+            overflow: hidden;
+            position: relative;
+            padding: 0.6rem 0;
+        }
+
+        .skills-marquee::before,
+        .skills-marquee::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 90px;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .skills-marquee::before {
+            left: 0;
+            background: linear-gradient(90deg, rgba(5, 8, 22, 1), rgba(5, 8, 22, 0));
+        }
+
+        .skills-marquee::after {
+            right: 0;
+            background: linear-gradient(270deg, rgba(5, 8, 22, 1), rgba(5, 8, 22, 0));
+        }
+
+        .skills-track {
+            display: flex;
+            gap: 1rem;
+            width: max-content;
+            animation: skills-scroll 20s linear infinite;
+            will-change: transform;
+        }
+
+        .skills-marquee:hover .skills-track {
+            animation-play-state: paused;
+        }
+
+        .skill-pill {
+            display: inline-block;
+            padding: 1rem 1.3rem;
+            border-radius: 999px;
+            background: rgba(124, 147, 255, 0.12);
+            color: #dce7ff;
+            font-size: 1.05rem;
+            font-weight: 800;
+            letter-spacing: 0.03em;
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            box-shadow: 0 0 20px rgba(36, 216, 192, 0.22), 0 0 30px rgba(124, 147, 255, 0.2);
+            text-shadow: 0 0 16px rgba(36, 216, 192, 0.35);
+            white-space: nowrap;
+        }
+
+        .certifications-marquee {
+            overflow: hidden;
+            position: relative;
+            padding: 0.4rem 0;
+        }
+
+        .certifications-marquee::before,
+        .certifications-marquee::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 90px;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .certifications-marquee::before {
+            left: 0;
+            background: linear-gradient(90deg, rgba(5, 8, 22, 1), rgba(5, 8, 22, 0));
+        }
+
+        .certifications-marquee::after {
+            right: 0;
+            background: linear-gradient(270deg, rgba(5, 8, 22, 1), rgba(5, 8, 22, 0));
+        }
+
+        .certifications-track {
+            display: flex;
+            gap: 1rem;
+            width: max-content;
+            animation: certifications-scroll 24s linear infinite;
+            will-change: transform;
+        }
+
+        .certifications-marquee:hover .certifications-track {
+            animation-play-state: paused;
+        }
+
+        .certification-card {
+            min-width: 240px;
+            max-width: 260px;
+            border-radius: 20px;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(124, 147, 255, 0.16), rgba(36, 216, 192, 0.08));
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 0 0 1px rgba(124, 147, 255, 0.14), 0 0 24px rgba(36, 216, 192, 0.22), 0 0 42px rgba(124, 147, 255, 0.16);
+        }
+
+        .certification-image {
+            height: 160px;
+            width: 100%;
+            background: linear-gradient(135deg, rgba(124, 147, 255, 0.22), rgba(36, 216, 192, 0.16));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .certification-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .certification-content {
+            padding: 1rem;
+        }
+
+        .certification-content h3 {
+            color: #fff;
+            margin-bottom: 0.35rem;
+            font-size: 0.98rem;
+        }
+
+        .certification-content p {
+            color: var(--muted);
+            font-size: 0.84rem;
+            margin-bottom: 0.7rem;
+        }
+
+        .certification-link {
+            color: #8bdcff;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        .certification-link:hover {
+            color: #fff;
+            text-shadow: 0 0 15px rgba(36, 216, 192, 0.7), 0 0 22px rgba(124, 147, 255, 0.38);
         }
 
         .section-heading {
@@ -331,7 +552,7 @@
             border-radius: 20px;
             background: linear-gradient(135deg, rgba(124, 147, 255, 0.16), rgba(36, 216, 192, 0.08));
             border: 1px solid rgba(255, 255, 255, 0.12);
-            box-shadow: 0 0 0 1px rgba(124, 147, 255, 0.15), 0 0 24px rgba(36, 216, 192, 0.2), 0 0 46px rgba(124, 147, 255, 0.16), var(--shadow);
+            box-shadow: 0 0 0 1px rgba(124, 147, 255, 0.15), 0 0 28px rgba(36, 216, 192, 0.24), 0 0 52px rgba(124, 147, 255, 0.2), var(--shadow);
             position: relative;
             overflow: hidden;
             transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
@@ -353,7 +574,7 @@
 
         .highlight-card:hover {
             transform: translateY(-4px) scale(1.02);
-            box-shadow: 0 0 0 1px rgba(124, 147, 255, 0.24), 0 0 32px rgba(36, 216, 192, 0.28), 0 0 58px rgba(124, 147, 255, 0.24), var(--shadow);
+            box-shadow: 0 0 0 1px rgba(124, 147, 255, 0.24), 0 0 36px rgba(36, 216, 192, 0.32), 0 0 64px rgba(124, 147, 255, 0.28), var(--shadow);
             border-color: rgba(124, 147, 255, 0.42);
         }
 
@@ -389,13 +610,18 @@
             align-items: start;
         }
 
-        .about-card, .contact-card, .project-card {
+        .about-card, .contact-card, .project-card, .service-card, .highlight-card, .stat-card, .focus-item, .contact-method, .certification-item, .skills-panel {
             padding: 1.4rem;
             border-radius: 24px;
             background: var(--card);
             border: 1px solid var(--border);
-            box-shadow: var(--shadow);
+            box-shadow: 0 0 24px rgba(124, 147, 255, 0.24), 0 0 48px rgba(36, 216, 192, 0.18), 0 12px 44px rgba(0, 0, 0, 0.32);
             backdrop-filter: blur(16px);
+        }
+
+        .about-card:hover, .contact-card:hover, .project-card:hover, .service-card:hover, .highlight-card:hover, .stat-card:hover, .focus-item:hover, .contact-method:hover, .certification-item:hover, .skills-panel:hover {
+            border-color: rgba(124, 147, 255, 0.45);
+            box-shadow: 0 0 32px rgba(124, 147, 255, 0.32), 0 0 56px rgba(36, 216, 192, 0.24), 0 16px 50px rgba(0, 0, 0, 0.38);
         }
 
         .about-card p {
@@ -441,14 +667,165 @@
             font-size: 0.95rem;
         }
 
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-            gap: 1.3rem;
+        .tech-marquee-section {
+            padding: 1rem 0 3rem;
+        }
+
+        .tech-heading {
+            margin-bottom: 1.4rem;
+        }
+
+        .tech-marquee-row {
+            position: relative;
+            overflow: hidden;
+            padding: 0.75rem 0;
+            margin-bottom: 1rem;
+        }
+
+        .tech-marquee-row::before,
+        .tech-marquee-row::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 110px;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .tech-marquee-row::before {
+            left: 0;
+            background: linear-gradient(90deg, rgba(5, 8, 22, 1), rgba(5, 8, 22, 0));
+        }
+
+        .tech-marquee-row::after {
+            right: 0;
+            background: linear-gradient(270deg, rgba(5, 8, 22, 1), rgba(5, 8, 22, 0));
+        }
+
+        .tech-marquee-track {
+            display: flex;
+            gap: 0.85rem;
+            width: max-content;
+            will-change: transform;
+            animation-duration: 26s;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+            padding: 0.15rem 0;
+        }
+
+        .tech-marquee-row-left .tech-marquee-track {
+            animation-name: marquee-left;
+        }
+
+        .tech-marquee-row-right .tech-marquee-track {
+            animation-name: marquee-right;
+        }
+
+        .tech-marquee-row:hover .tech-marquee-track {
+            animation-play-state: paused;
+        }
+
+        .tech-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            padding: 0.72rem 0.95rem;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.055);
+            border: 1px solid rgba(124, 147, 255, 0.24);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 0 18px rgba(0, 217, 255, 0.12);
+            backdrop-filter: blur(14px);
+            color: #edf4ff;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            white-space: nowrap;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, filter 0.3s ease;
+        }
+
+        .tech-badge:hover {
+            transform: translateY(-2px) scale(1.03);
+            border-color: rgba(0, 217, 255, 0.45);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.12), 0 0 22px rgba(0, 217, 255, 0.24), 0 0 32px rgba(139, 92, 246, 0.2);
+            filter: brightness(1.08);
+        }
+
+        .tech-badge-icon {
+            width: 2.2rem;
+            height: 2.2rem;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.2), rgba(139, 92, 246, 0.18));
+            border: 1px solid rgba(0, 217, 255, 0.3);
+            box-shadow: 0 0 14px rgba(0, 217, 255, 0.18), inset 0 0 10px rgba(139, 92, 246, 0.18);
+            flex-shrink: 0;
+        }
+
+        .tech-badge-icon img {
+            width: 1.02rem;
+            height: 1.02rem;
+            object-fit: contain;
+            display: block;
+            filter: brightness(0) invert(1);
+        }
+
+        .tech-badge-text {
+            font-size: 0.88rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: #7fe7ff;
+            text-shadow: 0 0 12px rgba(0, 217, 255, 0.3);
+        }
+
+        .projects-marquee {
+            overflow: hidden;
+            position: relative;
+            padding: 0.4rem 0;
+        }
+
+        .projects-marquee::before,
+        .projects-marquee::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 90px;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .projects-marquee::before {
+            left: 0;
+            background: linear-gradient(90deg, rgba(5, 8, 22, 1), rgba(5, 8, 22, 0));
+        }
+
+        .projects-marquee::after {
+            right: 0;
+            background: linear-gradient(270deg, rgba(5, 8, 22, 1), rgba(5, 8, 22, 0));
+        }
+
+        .projects-track {
+            display: flex;
+            gap: 1.15rem;
+            width: max-content;
+            animation: projects-scroll 24s linear infinite;
+            will-change: transform;
+        }
+
+        .projects-marquee:hover .projects-track {
+            animation-play-state: paused;
         }
 
         .project-card {
+            width: min(230px, 72vw);
+            min-width: 220px;
+            min-height: 220px;
+            padding: 0.6rem;
             transition: transform 0.3s ease, border-color 0.3s ease;
+            display: flex;
+            flex-direction: column;
         }
 
         .project-card:hover {
@@ -458,10 +835,11 @@
 
         .project-image {
             width: 100%;
-            height: 180px;
-            border-radius: 16px;
+            height: 110px;
+            border-radius: 12px;
             overflow: hidden;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
+            flex-shrink: 0;
         }
 
         .project-image img {
@@ -473,35 +851,36 @@
 
         .project-card h3 {
             color: #fff;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.2rem;
+            font-size: 0.92rem;
         }
 
         .project-card p {
             color: var(--muted);
-            font-size: 0.95rem;
-            margin-bottom: 1rem;
+            font-size: 0.78rem;
+            margin-bottom: 0.45rem;
         }
 
         .tech-tags {
             display: flex;
-            gap: 0.5rem;
+            gap: 0.35rem;
             flex-wrap: wrap;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
         }
 
         .tech-tag {
             background: rgba(124, 147, 255, 0.16);
             color: #cfd8ff;
-            padding: 0.4rem 0.7rem;
+            padding: 0.3rem 0.55rem;
             border-radius: 999px;
-            font-size: 0.8rem;
+            font-size: 0.72rem;
             font-weight: 600;
         }
 
         .project-links {
             display: flex;
             flex-direction: column;
-            gap: 0.45rem;
+            gap: 0.3rem;
         }
 
         .project-link {
@@ -589,6 +968,51 @@
             }
         }
 
+        @keyframes skills-scroll {
+            from {
+                transform: translateX(0);
+            }
+            to {
+                transform: translateX(-50%);
+            }
+        }
+
+        @keyframes projects-scroll {
+            from {
+                transform: translateX(0);
+            }
+            to {
+                transform: translateX(-50%);
+            }
+        }
+
+        @keyframes marquee-left {
+            from {
+                transform: translate3d(0, 0, 0);
+            }
+            to {
+                transform: translate3d(-50%, 0, 0);
+            }
+        }
+
+        @keyframes marquee-right {
+            from {
+                transform: translate3d(-50%, 0, 0);
+            }
+            to {
+                transform: translate3d(0, 0, 0);
+            }
+        }
+
+        @keyframes certifications-scroll {
+            from {
+                transform: translateX(0);
+            }
+            to {
+                transform: translateX(-50%);
+            }
+        }
+
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after {
                 animation: none !important;
@@ -598,7 +1022,7 @@
         }
 
         @media (max-width: 900px) {
-            .hero-grid, .about-grid {
+            .hero-grid, .about-grid, .skills-shell {
                 grid-template-columns: 1fr;
             }
 
@@ -637,6 +1061,9 @@
             <ul>
                 <li><a class="nav-link" href="#home">Home</a></li>
                 <li><a class="nav-link" href="#about">About</a></li>
+                <li><a class="nav-link" href="#services">Services</a></li>
+                <li><a class="nav-link" href="#certifications">Certifications</a></li>
+                <li><a class="nav-link" href="#skills">Skills</a></li>
                 <li><a class="nav-link" href="#projects">Projects</a></li>
                 <li><a class="nav-link" href="#contact">Contact</a></li>
             </ul>
@@ -647,9 +1074,9 @@
         <div class="container">
             <div class="hero-grid">
                 <div class="hero-content">
-                    <span class="eyebrow">AI Engineer • Data Scientist • Builder</span>
-                    <h1>Hello, I’m <span class="name">Vincent Tettey</span><br>and I build intelligent systems that solve real-world problems.</h1>
-                    <p>I design and ship AI-powered products, data-driven applications, and machine learning solutions with a strong focus on practical impact, scalable architecture, and clean engineering.</p>
+                    <span class="eyebrow">Portfolio Website Builder • AI Engineer • Data Scientist</span>
+                    <h1>Hello, I’m <span class="name">Vincent Tettey</span><br>and I build professional portfolio websites and intelligent digital experiences.</h1>
+                    <p>I design and ship polished portfolio websites, AI-powered products, and data-driven applications with a strong focus on practical impact, scalable architecture, and clean engineering.</p>
                     <div class="hero-actions">
                         <a href="#projects" class="btn btn-primary">Explore My Work</a>
                         <a href="#contact" class="btn btn-secondary">Let’s Connect</a>
@@ -675,6 +1102,17 @@
                         <img src="lv_0_20260419021727.jpg" alt="Vincent Tettey">
                         <div class="profile-badge">Available for innovation-focused projects</div>
                     </div>
+                    <div class="social-links" aria-label="Social links">
+                        <a href="https://github.com/vincenttettey07-lang/" target="_blank" rel="noreferrer" aria-label="GitHub">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5A12 12 0 0 0 0 12.6c0 5.3 3.4 9.8 8.2 11.4.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.4-4-1.4-.5-1.3-1.2-1.7-1.2-1.7-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 .1 2.4-.9 3-1.4.1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.4 11.4 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.3v3.4c0 .3.2.7.8.6A12 12 0 0 0 24 12.6 12 12 0 0 0 12 .5Z"/></svg>
+                        </a>
+                        <a href="https://www.linkedin.com/in/vincent-tettey-280185359/" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.94 8.5A1.56 1.56 0 1 0 6.94 5.4a1.56 1.56 0 0 0 0 3.1ZM5.5 9.5h2.88V18H5.5zM10.3 9.5h2.76v1.16h.04c.38-.72 1.32-1.48 2.72-1.48 2.9 0 3.44 1.91 3.44 4.39V18h-2.88v-7.59c0-1.81-.03-4.14-2.52-4.14-2.53 0-2.92 1.97-2.92 4.01V18H10.3z"/></svg>
+                        </a>
+                        <a href="mailto:vincenttettey07@gmail.com" aria-label="Email">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4.2-8 5.3-8-5.3V6l8 5.3L20 6Z"/></svg>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -685,19 +1123,19 @@
             <div class="highlights-grid">
                 <div class="highlight-card">
                     <span class="highlight-pill">Open to opportunities</span>
-                    <strong>Building AI products with measurable impact</strong>
+                    <strong>Building portfolio websites and AI products with measurable impact</strong>
                     <p>I enjoy turning complex problems into thoughtful, practical solutions that create real value.</p>
                 </div>
                 <div class="highlight-card">
                     <span class="highlight-pill">What I bring</span>
-                    <strong>From prototype to production-ready systems</strong>
-                    <p>My work spans model development, backend integration, data pipelines, and polished user experiences.</p>
+                    <strong>From polished portfolios to production-ready systems</strong>
+                    <p>My work spans portfolio website design, model development, backend integration, data pipelines, and polished user experiences.</p>
                 </div>
                 <div class="highlight-card">
                     <a href="#contact" style="text-decoration: none; color: inherit; display: block;">
                         <span class="highlight-pill">Let’s connect</span>
-                        <strong>Interested in collaborations or full-time roles</strong>
-                        <p>Whether it’s a startup idea, research challenge, or applied AI project, I’d be glad to connect.</p>
+                        <strong>Interested in collaborations, portfolio projects, or full-time roles</strong>
+                        <p>Whether it’s a startup idea, research challenge, portfolio website build, or applied AI project, I’d be glad to connect.</p>
                     </a>
                 </div>
             </div>
@@ -708,12 +1146,12 @@
         <div class="container">
             <div class="section-heading">
                 <h2>About Me</h2>
-                <p>I bring together software engineering, machine learning, and applied AI to create practical products that move from idea to impact.</p>
+                <p>I bring together portfolio website building, software engineering, machine learning, and applied AI to create practical products that move from idea to impact.</p>
             </div>
             <div class="about-grid">
                 <div class="about-card">
-                    <p>I’m a passionate AI developer and data scientist focused on building intelligent systems that improve workflows, automate decision-making, and unlock value from data.</p>
-                    <p>My recent work includes an AI-powered complaint assistant for pharmaceutical companies and a range of machine learning projects spanning recommendation systems, segmentation, and predictive analytics.</p>
+                    <p>I’m a passionate AI developer, portfolio website builder, and data scientist focused on building intelligent systems that improve workflows, automate decision-making, and unlock value from data.</p>
+                    <p>My recent work includes polished portfolio websites, an AI-powered complaint assistant for pharmaceutical companies, and a range of machine learning projects spanning recommendation systems, segmentation, and predictive analytics.</p>
                     <div class="skills">
                         <span class="skill">Machine Learning</span>
                         <span class="skill">Deep Learning</span>
@@ -742,76 +1180,360 @@
         </div>
     </section>
 
+    <section id="services">
+        <div class="container">
+            <div class="section-heading">
+                <h2>Services</h2>
+                <p>I help clients create polished portfolio websites and intelligent digital products that make a strong professional impression.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🤖</div>
+                    <h3>AI Product Development</h3>
+                    <p>Designing and delivering AI-driven applications, automation systems, and intelligent experiences aligned with business goals.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🌐</div>
+                    <h3>Portfolio Website Building</h3>
+                    <p>Creating modern, responsive, and professionally crafted portfolio websites that showcase your work, skills, and brand clearly.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📊</div>
+                    <h3>Data Science & Analytics</h3>
+                    <p>Building predictive models, customer insights, and data solutions that turn complex information into actionable outcomes.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🔧</div>
+                    <h3>Backend & Web Solutions</h3>
+                    <p>Developing robust APIs, scalable platforms, and modern web experiences with professional engineering and clean architecture.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="container">
+            <div class="section-heading">
+                <h2>Skills</h2>
+                <p>Core capabilities I bring to building portfolio websites and intelligent digital products.</p>
+            </div>
+            <div class="skills-marquee" aria-label="Skills marquee">
+                <div class="skills-track">
+                    <span class="skill-pill">Machine Learning</span>
+                    <span class="skill-pill">Deep Learning</span>
+                    <span class="skill-pill">NLP</span>
+                    <span class="skill-pill">Data Science</span>
+                    <span class="skill-pill">Python</span>
+                    <span class="skill-pill">FastAPI</span>
+                    <span class="skill-pill">React</span>
+                    <span class="skill-pill">LangGraph</span>
+                    <span class="skill-pill">Streamlit</span>
+                    <span class="skill-pill">Applied AI</span>
+                    <span class="skill-pill">Automation</span>
+                    <span class="skill-pill">Backend Systems</span>
+                    <span class="skill-pill">Analytics</span>
+                    <span class="skill-pill">Product Engineering</span>
+                    <span class="skill-pill">Machine Learning</span>
+                    <span class="skill-pill">Deep Learning</span>
+                    <span class="skill-pill">NLP</span>
+                    <span class="skill-pill">Data Science</span>
+                    <span class="skill-pill">Python</span>
+                    <span class="skill-pill">FastAPI</span>
+                    <span class="skill-pill">React</span>
+                    <span class="skill-pill">LangGraph</span>
+                    <span class="skill-pill">Streamlit</span>
+                    <span class="skill-pill">Applied AI</span>
+                    <span class="skill-pill">Automation</span>
+                    <span class="skill-pill">Backend Systems</span>
+                    <span class="skill-pill">Analytics</span>
+                    <span class="skill-pill">Product Engineering</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="certifications">
+        <div class="container">
+            <div class="section-heading">
+                <h2>Licenses & Certifications</h2>
+                <p>A selection of credentials that reflect my continued growth in data science, AI, and web technologies.</p>
+            </div>
+            <div class="certifications-marquee" aria-label="Certifications marquee">
+                <div class="certifications-track">
+                    <div class="certification-card">
+                        <div class="certification-image">
+                            <img src="AWS.jfif" alt="AWS for Data Science certificate">
+                        </div>
+                        <div class="certification-content">
+                            <h3>AWS for Data Science</h3>
+                            <p>Simplilearn • SkillUp</p>
+                            <a class="certification-link" href="https://www.simplilearn.com/free-aws-for-data-science-course-skillup" target="_blank" rel="noopener noreferrer">View certificate →</a>
+                        </div>
+                    </div>
+
+                    <div class="certification-card">
+                        <div class="certification-image">
+                            <img src="WEB SCRAPING.jfif" alt="Web Scraping in Python certificate">
+                        </div>
+                        <div class="certification-content">
+                            <h3>Web Scraping in Python</h3>
+                            <p>Simplilearn • SkillUp</p>
+                            <span class="certification-link disabled">No public link available</span>
+                        </div>
+                    </div>
+
+                    <div class="certification-card">
+                        <div class="certification-image">
+                            <img src="ee69ab3b-700b-431b-b18e-a7b7ae59c2f7.png" alt="IBM SkillsBuild credential certificate">
+                        </div>
+                        <div class="certification-content">
+                            <h3>Python for Data Science</h3>
+                            <p>3IXL EDUTECH</p>
+                            <a class="certification-link" href="https://credsverse.com/credentials/ee69ab3b-700b-431b-b18e-a7b7ae59c2f7" target="_blank" rel="noopener noreferrer">View credential →</a>
+                        </div>
+                    </div>
+
+                    <div class="certification-card">
+                        <div class="certification-image">
+                            <img src="Vincent Tettey - Intro to SQL.png" alt="Intro to SQL certification">
+                        </div>
+                        <div class="certification-content">
+                            <h3>Intro to SQL</h3>
+                            <p>Kaggle</p>
+                            <a class="certification-link" href="https://www.kaggle.com/learn/intro-to-sql" target="_blank" rel="noopener noreferrer">View certificate →</a>
+                        </div>
+                    </div>
+
+                    <div class="certification-card">
+                        <div class="certification-image">
+                            <img src="AWS.jfif" alt="AWS for Data Science certificate">
+                        </div>
+                        <div class="certification-content">
+                            <h3>AWS for Data Science</h3>
+                            <p>Simplilearn • SkillUp</p>
+                            <a class="certification-link" href="https://www.simplilearn.com/free-aws-for-data-science-course-skillup" target="_blank" rel="noopener noreferrer">View certificate →</a>
+                        </div>
+                    </div>
+
+                    <div class="certification-card">
+                        <div class="certification-image">
+                            <img src="Kaggle_introduction_to_big_query_or_sql.jfif" alt="Intro to SQL certificate">
+                        </div>
+                        <div class="certification-content">
+                            <h3>Intro to SQL</h3>
+                            <p>Kaggle</p>
+                            <a class="certification-link" href="https://www.kaggle.com/learn/intro-to-sql" target="_blank" rel="noopener noreferrer">View certificate →</a>
+                        </div>
+                    </div>
+
+                    <div class="certification-card">
+                        <div class="certification-image">
+                            <img src="ee69ab3b-700b-431b-b18e-a7b7ae59c2f7.png" alt="IBM SkillsBuild credential certificate">
+                        </div>
+                        <div class="certification-content">
+                            <h3>Python for Data Science</h3>
+                            <p>3IXL EDUTECH</p>
+                            <a class="certification-link" href="https://credsverse.com/credentials/ee69ab3b-700b-431b-b18e-a7b7ae59c2f7" target="_blank" rel="noopener noreferrer">View credential →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="tools" class="tech-marquee-section">
+        <div class="container">
+            <div class="section-heading tech-heading">
+                <h2>AI Technologies & Tools I Work With</h2>
+                <p>From foundation models and orchestration frameworks to developer tooling and analytics platforms.</p>
+            </div>
+
+            <div class="tech-marquee-row tech-marquee-row-left">
+                <div class="tech-marquee-track">
+                    <div class="tech-badge"><span class="tech-badge-icon"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.0.0/icons/openai.svg" alt="ChatGPT"></span><span>ChatGPT</span></div>
+                    <div class="tech-badge"><span class="tech-badge-icon"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.0.0/icons/google.svg" alt="Gemini"></span><span>Gemini</span></div>
+                    <div class="tech-badge"><span class="tech-badge-icon"><img src="https://api.iconify.design/logos:claude.svg" alt="Claude"></span><span>Claude</span></div>
+                    <div class="tech-badge"><span class="tech-badge-icon"><img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/kimi.svg" alt="Kimi"></span><span>Kimi</span></div>
+                    <div class="tech-badge"><span class="tech-badge-icon"><img src="https://api.iconify.design/logos:meta.svg" alt="Meta"></span><span>Llama</span></div>
+                    <div class="tech-badge"><span class="tech-badge-icon"><img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/deepseek.svg" alt="DeepSeek"></span><span>DeepSeek</span></div>
+                    <div class="tech-badge"><span class="tech-badge-icon"><img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/qwen.svg" alt="Qwen"></span><span>Qwen</span></div>
+                    <div class="tech-badge"><span class="tech-badge-icon"><img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/mistral.svg" alt="Mistral"></span><span>Mistral</span></div>
+                    <div class="tech-badge"><span class="tech-badge-icon"><img src="https://api.iconify.design/logos:grok.svg" alt="Grok"></span><span>Grok</span></div>
+                    <div class="tech-badge"><span class="tech-badge-icon"><img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/huggingface.svg" alt="Hugging Face"></span><span>Hugging Face</span></div>
+                    <div class="tech-badge"><span class="tech-badge-icon"><img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/openrouter.svg" alt="OpenRouter"></span><span>OpenRouter</span></div>
+                    <div class="tech-badge"><span class="tech-badge-icon"><img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/ollama.svg" alt="Ollama"></span><span>Ollama</span></div>
+                    <div class="tech-badge"><span class="tech-badge-icon"><img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/langchain.svg" alt="LangChain"></span><span>LangChain</span></div>
+                    <div class="tech-badge"><span class="tech-badge-icon"><img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/llamaindex.svg" alt="LlamaIndex"></span><span>LlamaIndex</span></div>
+                    <div class="tech-badge"><span class="tech-badge-icon"><img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/cohere.svg" alt="Cohere"></span><span>Cohere</span></div>
+                    <div class="tech-badge"><span class="tech-badge-icon"><img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/perplexity.svg" alt="Perplexity"></span><span>Perplexity</span></div>
+                    <div class="tech-badge"><span class="tech-badge-icon"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.0.0/icons/github.svg" alt="GitHub"></span><span>GitHub</span></div>
+                    <div class="tech-badge"><span class="tech-badge-icon"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.0.0/icons/git.svg" alt="Git"></span><span>Git</span></div>
+                    <div class="tech-badge"><span class="tech-badge-icon"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.0.0/icons/visualstudiocode.svg" alt="VS Code"></span><span>VS Code</span></div>
+                    <div class="tech-badge"><span class="tech-badge-icon"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.0.0/icons/anaconda.svg" alt="Anaconda"></span><span>Anaconda</span></div>
+                    <div class="tech-badge"><span class="tech-badge-icon"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.0.0/icons/python.svg" alt="Python"></span><span>Python</span></div>
+                    <div class="tech-badge"><span class="tech-badge-icon"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.0.0/icons/docker.svg" alt="Docker"></span><span>Docker</span></div>
+                    <div class="tech-badge"><span class="tech-badge-icon"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.0.0/icons/jupyter.svg" alt="Jupyter"></span><span>Jupyter</span></div>
+                    <div class="tech-badge"><span class="tech-badge-icon"><img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/elevenlabs.svg" alt="ElevenLabs"></span><span>ElevenLabs</span></div>
+                    <div class="tech-badge"><span class="tech-badge-icon"><img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/kimi.svg" alt="Kimi"></span><span>Kimi</span></div>
+                    <div class="tech-badge"><span class="tech-badge-icon"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.0.0/icons/googlechrome.svg" alt="Chrome"></span><span>Chrome</span></div>
+                    <div class="tech-badge"><span class="tech-badge-icon"><img src="https://api.iconify.design/logos:microsoft-icon.svg" alt="Microsoft"></span><span>Copilot</span></div>
+                    <div class="tech-badge"><span class="tech-badge-icon"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.0.0/icons/openai.svg" alt="OpenAI"></span><span>ChatGPT</span></div>
+                    <div class="tech-badge"><span class="tech-badge-icon"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.0.0/icons/google.svg" alt="Google"></span><span>Gemini</span></div>
+                    <div class="tech-badge"><span class="tech-badge-icon"><img src="https://api.iconify.design/logos:claude.svg" alt="Claude"></span><span>Claude</span></div>
+                </div>
+            </div>
+
+            <div class="tech-marquee-row tech-marquee-row-right">
+                <div class="tech-marquee-track">
+                    <div class="tech-badge"><span class="tech-badge-icon"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.0.0/icons/github.svg" alt="GitHub"></span><span>GitHub</span></div>
+                    <div class="tech-badge"><span class="tech-badge-icon"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.0.0/icons/visualstudiocode.svg" alt="VS Code"></span><span>VS Code</span></div>
+                    <div class="tech-badge"><span class="tech-badge-icon"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.0.0/icons/python.svg" alt="Python"></span><span>Python</span></div>
+                    <div class="tech-badge"><span class="tech-badge-icon"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.0.0/icons/docker.svg" alt="Docker"></span><span>Docker</span></div>
+                    <div class="tech-badge"><span class="tech-badge-icon"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.0.0/icons/jupyter.svg" alt="Jupyter"></span><span>Jupyter</span></div>
+                    <div class="tech-badge"><span class="tech-badge-icon"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.0.0/icons/git.svg" alt="Git"></span><span>Git</span></div>
+                    <div class="tech-badge"><span class="tech-badge-icon"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.0.0/icons/anaconda.svg" alt="Anaconda"></span><span>Anaconda</span></div>
+                    <div class="tech-badge"><span class="tech-badge-icon"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.0.0/icons/googlechrome.svg" alt="Chrome"></span><span>Chrome</span></div>
+                    <div class="tech-badge"><span class="tech-badge-icon"><img src="https://api.iconify.design/logos:microsoft-icon.svg" alt="Microsoft"></span><span>Copilot</span></div>
+                    <div class="tech-badge"><span class="tech-badge-icon"><img src="https://api.iconify.design/logos:meta.svg" alt="Meta"></span><span>Llama</span></div>
+                    <div class="tech-badge"><span class="tech-badge-icon"><img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/deepseek.svg" alt="DeepSeek"></span><span>DeepSeek</span></div>
+                    <div class="tech-badge"><span class="tech-badge-icon"><img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/qwen.svg" alt="Qwen"></span><span>Qwen</span></div>
+                    <div class="tech-badge"><span class="tech-badge-icon"><img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/mistral.svg" alt="Mistral"></span><span>Mistral</span></div>
+                    <div class="tech-badge"><span class="tech-badge-icon"><img src="https://api.iconify.design/logos:grok.svg" alt="Grok"></span><span>Grok</span></div>
+                    <div class="tech-badge"><span class="tech-badge-icon"><img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/openrouter.svg" alt="OpenRouter"></span><span>OpenRouter</span></div>
+                    <div class="tech-badge"><span class="tech-badge-icon"><img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/ollama.svg" alt="Ollama"></span><span>Ollama</span></div>
+                    <div class="tech-badge"><span class="tech-badge-icon"><img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/langchain.svg" alt="LangChain"></span><span>LangChain</span></div>
+                    <div class="tech-badge"><span class="tech-badge-icon"><img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/huggingface.svg" alt="Hugging Face"></span><span>Hugging Face</span></div>
+                    <div class="tech-badge"><span class="tech-badge-icon"><img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/perplexity.svg" alt="Perplexity"></span><span>Perplexity</span></div>
+                    <div class="tech-badge"><span class="tech-badge-icon"><img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/elevenlabs.svg" alt="ElevenLabs"></span><span>ElevenLabs</span></div>
+                    <div class="tech-badge"><span class="tech-badge-icon"><img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/kimi.svg" alt="Kimi"></span><span>Kimi</span></div>
+                    <div class="tech-badge"><span class="tech-badge-icon"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.0.0/icons/openai.svg" alt="OpenAI"></span><span>ChatGPT</span></div>
+                    <div class="tech-badge"><span class="tech-badge-icon"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.0.0/icons/google.svg" alt="Google"></span><span>Gemini</span></div>
+                    <div class="tech-badge"><span class="tech-badge-icon"><img src="https://api.iconify.design/logos:claude.svg" alt="Claude"></span><span>Claude</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="projects">
         <div class="container">
             <div class="section-heading">
                 <h2>Featured Projects</h2>
                 <p>A selection of projects that reflect my work in AI, data science, and applied software development.</p>
             </div>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="Annotation 2026-04-20 022828.png" alt="Book Recommendation System">
+            <div class="projects-marquee">
+                <div class="projects-track">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="Annotation 2026-04-20 022828.png" alt="Book Recommendation System">
+                        </div>
+                        <h3>Book Recommendation System</h3>
+                        <p>A machine learning-powered recommendation system built around text similarity and personalized suggestions.</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">NLP</span>
+                            <span class="tech-tag">Streamlit</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://book-recommendation-system-majtndx5drmajufn7cp235.streamlit.app/" class="project-link" target="_blank">View Live App →</a>
+                        </div>
                     </div>
-                    <h3>Book Recommendation System</h3>
-                    <p>A machine learning-powered recommendation system built around text similarity and personalized suggestions.</p>
-                    <div class="tech-tags">
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">NLP</span>
-                        <span class="tech-tag">Streamlit</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://book-recommendation-system-majtndx5drmajufn7cp235.streamlit.app/" class="project-link" target="_blank">View Live App →</a>
-                    </div>
-                </div>
 
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="Annotation 2026-04-20 022124.png" alt="Customer Segmentation">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="Annotation 2026-04-20 022124.png" alt="Customer Segmentation">
+                        </div>
+                        <h3>Customer Segmentation</h3>
+                        <p>An RFM-based segmentation app that uses clustering to identify customer groups and support decision-making.</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">K-Means</span>
+                            <span class="tech-tag">Scikit-learn</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://customer-segmentation-app-durh2blbgqyyjjk2yikkga.streamlit.app/" class="project-link" target="_blank">View Live App →</a>
+                        </div>
                     </div>
-                    <h3>Customer Segmentation</h3>
-                    <p>An RFM-based segmentation app that uses clustering to identify customer groups and support decision-making.</p>
-                    <div class="tech-tags">
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">K-Means</span>
-                        <span class="tech-tag">Scikit-learn</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://customer-segmentation-app-durh2blbgqyyjjk2yikkga.streamlit.app/" class="project-link" target="_blank">View Live App →</a>
-                    </div>
-                </div>
 
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="download (1).webp" alt="Summer Analytics Hackathon">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="download (1).webp" alt="Summer Analytics Hackathon">
+                        </div>
+                        <h3>Summer Analytics Hackathon</h3>
+                        <p>A high-impact classification project using CDC NHANES data to predict age group with an end-to-end ML workflow.</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Machine Learning</span>
+                            <span class="tech-tag">Random Forest</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/vincenttettey07-lang/Summer-Analytics-2026-HACKATHON-" class="project-link" target="_blank">View GitHub Repo →</a>
+                        </div>
                     </div>
-                    <h3>Summer Analytics Hackathon</h3>
-                    <p>A high-impact classification project using CDC NHANES data to predict age group with an end-to-end ML workflow.</p>
-                    <div class="tech-tags">
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">Machine Learning</span>
-                        <span class="tech-tag">Random Forest</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://github.com/vincenttettey07-lang/Summer-Analytics-2026-HACKATHON-" class="project-link" target="_blank">View GitHub Repo →</a>
-                    </div>
-                </div>
 
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="download.webp" alt="AI Complaint Assistant">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="download.webp" alt="AI Complaint Assistant">
+                        </div>
+                        <h3>AI-Powered Complaint Assistant</h3>
+                        <p>A pharmaceutical complaint management system that combines AI extraction, risk analysis, and structured data workflows.</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">FastAPI</span>
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">LangGraph</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/vincenttettey07-lang/ai-powered-complaint-assistant" class="project-link" target="_blank">View GitHub Repo →</a>
+                            <a href="https://drive.google.com/file/d/1a60vDI60BTuOSccRuBGn087BqEGnNHyd/view?usp=drivesdk" class="project-link" target="_blank">Watch Demo Video →</a>
+                        </div>
                     </div>
-                    <h3>AI-Powered Complaint Assistant</h3>
-                    <p>A pharmaceutical complaint management system that combines AI extraction, risk analysis, and structured data workflows.</p>
-                    <div class="tech-tags">
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">FastAPI</span>
-                        <span class="tech-tag">React</span>
-                        <span class="tech-tag">LangGraph</span>
+
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="bot.webp" alt="SmileBot AI Agent">
+                        </div>
+                        <h3>SmileBot</h3>
+                        <p>A conversational AI agent for a simulated dental clinic that answers patient questions, captures booking requests, and qualifies leads with CRM integration.</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">AI Agent</span>
+                            <span class="tech-tag">Conversational AI</span>
+                            <span class="tech-tag">CRM</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://neoagent.hellotars.com/chat/59FeyTC3" class="project-link" target="_blank">View Live App →</a>
+                        </div>
                     </div>
-                    <div class="project-links">
-                        <a href="https://github.com/vincenttettey07-lang/ai-powered-complaint-assistant" class="project-link" target="_blank">View GitHub Repo →</a>
-                        <a href="https://drive.google.com/file/d/1a60vDI60BTuOSccRuBGn087BqEGnNHyd/view?usp=drivesdk" class="project-link" target="_blank">Watch Demo Video →</a>
+
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="Annotation 2026-04-20 022828.png" alt="Book Recommendation System">
+                        </div>
+                        <h3>Book Recommendation System</h3>
+                        <p>A machine learning-powered recommendation system built around text similarity and personalized suggestions.</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">NLP</span>
+                            <span class="tech-tag">Streamlit</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://book-recommendation-system-majtndx5drmajufn7cp235.streamlit.app/" class="project-link" target="_blank">View Live App →</a>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="Annotation 2026-04-20 022124.png" alt="Customer Segmentation">
+                        </div>
+                        <h3>Customer Segmentation</h3>
+                        <p>An RFM-based segmentation app that uses clustering to identify customer groups and support decision-making.</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">K-Means</span>
+                            <span class="tech-tag">Scikit-learn</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://customer-segmentation-app-durh2blbgqyyjjk2yikkga.streamlit.app/" class="project-link" target="_blank">View Live App →</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -822,7 +1544,7 @@
         <div class="container">
             <div class="section-heading">
                 <h2>Let’s Build Something Meaningful</h2>
-                <p>Open to collaborations, technical projects, and opportunities where AI and software can create measurable value.</p>
+                <p>Open to collaborations, portfolio website builds, technical projects, and opportunities where AI and software can create measurable value.</p>
             </div>
             <div class="contact-card">
                 <div class="contact-method">
